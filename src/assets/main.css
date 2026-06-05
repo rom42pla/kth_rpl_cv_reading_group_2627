@@ -1,0 +1,16 @@
+.navbar {
+  background-color: #ebe5e0 !important;
+}
+
+.navbar-brand {
+  color: #000061 !important;
+}
+
+.nav-item {
+  color: #000061 !important;
+}
+
+.btn-primary {
+  border: none;
+  background-color: #000061 !important;
+}

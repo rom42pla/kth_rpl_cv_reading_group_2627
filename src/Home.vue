@@ -4,15 +4,8 @@
     <div class="row mb-5">
       <div class="col-md-8 mx-auto text-center">
         <h1 class="display-5 fw-bold">Computer Vision<br />Reading Group</h1>
-        <p class="text-muted mb-1">
-          2026/27 · Robotics, Perception & Learning (RPL) Department @ KTH
-        </p>
-        <hr class="my-4" />
-        <p class="lead">
-          A recurring seminar for researchers and students interested in computer vision, deep
-          learning, and related fields. Each session is centered around a selected paper, followed
-          by open discussion.
-        </p>
+        <p class="lead">2026/27</p>
+        <p class="text-muted mb-1">Robotics, Perception & Learning (RPL) Department @ KTH</p>
       </div>
     </div>
 

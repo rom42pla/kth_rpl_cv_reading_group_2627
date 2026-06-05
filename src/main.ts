@@ -21,6 +21,8 @@ Chart.register(
   LinearScale,
   BarElement,
 )
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/main.css'
 
 // pages
 import App from './App.vue'
@@ -32,8 +34,6 @@ import Stats from './Stats.vue'
 import Navbar from './components/Navbar.vue'
 import OrganizerCard from './components/OrganizerCard.vue'
 import ScheduleSession from './components/ScheduleSession.vue'
-
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 const routes = [
   { path: '/', component: Home },
