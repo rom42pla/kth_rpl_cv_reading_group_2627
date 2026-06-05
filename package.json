@@ -10,7 +10,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "format": "prettier --write --experimental-cli src/",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "rm -rf node_modules/.cache/gh-pages && npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",

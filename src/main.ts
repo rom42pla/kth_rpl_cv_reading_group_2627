@@ -1,5 +1,5 @@
 import { createApp, ref, onMounted } from 'vue'
-import { createWebHistory, createRouter } from 'vue-router'
+import { createWebHashHistory, createRouter } from 'vue-router'
 import {
   Chart,
   ArcElement,
@@ -43,7 +43,7 @@ const routes = [
 ]
 
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 })
 
