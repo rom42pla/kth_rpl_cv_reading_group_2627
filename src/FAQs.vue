@@ -1,6 +1,4 @@
 <template>
-  <Navbar />
-
   <div class="container">
     <div class="col-md-8 mx-auto">
       <h2>FAQs</h2>

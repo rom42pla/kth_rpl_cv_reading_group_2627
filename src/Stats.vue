@@ -67,7 +67,7 @@ const barOptions = {
 }
 
 onMounted(async () => {
-  const response = await fetch('/forms/registration.csv')
+  const response = await fetch(import.meta.env.BASE_URL + 'forms/registration.csv')
   const text = await response.text()
   const { data } = Papa.parse(text, { header: true, skipEmptyLines: true })
 
