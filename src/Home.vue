@@ -20,9 +20,10 @@
           </li>
           <li class="list-group-item">One or two papers per session</li>
           <li class="list-group-item">Rotating presenter, open discussion</li>
+          <li class="list-group-item">Different topics, each one lasting five sessions</li>
           <li class="list-group-item">
-            Usually at Fantum but always keep an eye on the
-            <RouterLink to="/schedule"> schedule</RouterLink>
+            6 course credits for PhD students, given after attending at least 24 sessions, and
+            giving 2 presentations
           </li>
         </ul>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="col-md-8 mx-auto">
-      <h2>FAQs</h2>
+      <h1 class="mb-4">FAQs</h1>
       <h3>What?</h3>
       <p>
         In each RG session, one or two papers will be presented, followed by questions and

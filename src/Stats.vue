@@ -1,6 +1,6 @@
 <template>
   <div class="container py-5">
-    <h2 class="mb-4">Registration stats</h2>
+    <h1 class="mb-4">Registration stats</h1>
 
     <div class="row justify-content-center g-4">
       <!-- Pie chart -->
