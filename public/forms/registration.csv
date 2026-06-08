@@ -1,4 +1,4 @@
-role,from_rpl,field,suggestions,willing
+role,department,field,suggestions,will_steering_committee
 PhD student,"Yes, I'm coming from RPL",Explainability,,Yes
 PhD student,"Yes, I'm coming from RPL","visual localization and mapping, novel view synthesis, visual representation learning","representation learning, self-supervised learning, learning theory",Yes
 PhD student,"Yes, I'm coming from RPL",continual learning,,Yes
@@ -8,3 +8,9 @@ PhD student,"Yes, I'm coming from RPL","World Modeling, Representation Learning"
 PhD student,"Yes, I'm coming from RPL","computer vision, 3D modeling, animal mesh reconstruction",,Yes
 PhD student,"Yes, I'm coming from RPL","semantic segmentation, generative models, spatio-temporal, remote sensing",,No
 PhD student,"Yes, I'm coming from RPL","representation learning, diffusion models","representation learning, generative models, world models",Yes
+PhD student,"Yes, I'm coming from RPL","Generative Modeling, Geometric DL, Biomolecular Structure Prediction",,Yes
+PhD student,"Yes, I'm coming from RPL",Generative modelling and representation learning,Memorization in generative modelling ,Yes
+PhD student,"Yes, I'm coming from RPL","representation learning, foundation models",,No
+PhD student,"Yes, I'm coming from RPL",computer vision in sports,,No
+PhD student,"Yes, I'm coming from RPL","computer vision, 3D reconstruction",generative model,Yes
+PhD student,"Yes, I'm coming from RPL",Generative Models,,Yes
