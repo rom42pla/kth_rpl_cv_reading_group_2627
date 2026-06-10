@@ -3,7 +3,7 @@
     <div class="col-md-8 mx-auto">
       <h1 class="mb-4">Schedule</h1>
       <p>
-        Note that the schedule after the winter break is tentative and subject to change. <br />
+        Note that the schedule is always subject to change. <br />
         More sessions will be scheduled soon.
       </p>
 
@@ -58,23 +58,28 @@
           </h2>
           <div class="accordion-collapse" :class="openNext ? 'collapse show' : 'collapse'">
             <div class="accordion-body">
-              <ScheduleSession
-                v-if="nextSession"
-                :session_number="nextSession.session_number"
-                :date="nextSession.date"
-                :time="nextSession.time"
-                :venue="nextSession.venue"
-                :topic="nextSession.topic"
-                :presenter="nextSession.presenter"
-                :paper_authors="nextSession.paper_authors"
-                :paper_title="nextSession.paper_title"
-                :paper_venue="nextSession.paper_venue"
-                :paper_year="nextSession.paper_year"
-                :slides_link="nextSession.slides_link"
-                :paper_link="nextSession.paper_link"
-                :arxiv_link="nextSession.arxiv_link"
-              />
-              <p v-else class="text-muted">No upcoming seminar scheduled.</p>
+              <div v-if="loading" class="d-flex flex-column gap-2">
+                <div class="text-muted lead">Retrieving data...</div>
+              </div>
+              <template v-else>
+                <ScheduleSession
+                  v-if="nextSession"
+                  :session_number="nextSession.session_number"
+                  :date="nextSession.date"
+                  :time="nextSession.time"
+                  :venue="nextSession.venue"
+                  :topic="nextSession.topic"
+                  :presenter="nextSession.presenter"
+                  :paper_authors="nextSession.paper_authors"
+                  :paper_title="nextSession.paper_title"
+                  :paper_venue="nextSession.paper_venue"
+                  :paper_year="nextSession.paper_year"
+                  :slides_link="nextSession.slides_link"
+                  :paper_link="nextSession.paper_link"
+                  :arxiv_link="nextSession.arxiv_link"
+                />
+                <p v-else class="text-muted">No upcoming seminar scheduled.</p>
+              </template>
             </div>
           </div>
         </div>
@@ -125,6 +130,7 @@
 import { ref, computed, onMounted } from 'vue'
 import Papa from 'papaparse'
 
+const loading = ref(true)
 const openPast = ref(false)
 const openNext = ref(true)
 const openScheduled = ref(false)
@@ -167,7 +173,10 @@ const scheduledSessions = computed(() =>
 const or = (val: string) => val?.trim() || null
 
 onMounted(async () => {
-  const response = await fetch(import.meta.env.BASE_URL + 'seminars.csv')
+  // const response = await fetch(import.meta.env.BASE_URL + 'seminars.csv')
+  const response = await fetch(
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT3L0usWznwB4gJtVAOtQnQx_X7mOrTZ0DInv_8PNg45xvO60FExh42rYybwwKNdebYoFDcWtS4c4gN/pub?gid=1236605236&single=true&output=csv',
+  )
   const text = await response.text()
   const { data: parsed } = Papa.parse(text, {
     header: true,
@@ -194,5 +203,6 @@ onMounted(async () => {
       arxiv_link: or(row.arxiv_link),
     }
   })
+  loading.value = false
 })
 </script>
