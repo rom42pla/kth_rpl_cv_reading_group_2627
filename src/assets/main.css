@@ -14,3 +14,13 @@
   border: none;
   background-color: #000061 !important;
 }
+
+.accordion-button {
+  background-color: #ebe5e0;
+  color: #000061;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #000061; /* Dark gray for active state */
+  color: white;
+}
