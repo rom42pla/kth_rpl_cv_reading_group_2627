@@ -13,5 +13,5 @@ export default defineConfig(({ command }) => ({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  base: command === 'build' ? '/kth_rpl_cv_reading_group_2627/' : '/',
+  base: command === 'build' ? '/kth_rpl_cv_reading_group/' : '/',
 }))

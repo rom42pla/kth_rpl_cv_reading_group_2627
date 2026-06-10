@@ -31,5 +31,6 @@ Nearly every code related to the website can be found in `src`
 - Individual pages are found in `src` (e.g. `Home.vue`, `FAQs.vue`)
 - Components that are reused throughout the website are found in `src/components` (e.g. `Navbar.vue`, `OrganizerCard.vue`)
 - `main.ts` contains both links related to the routing in the webpage and common imports
+- Seminars are scraped from [https://docs.google.com/spreadsheets/d/1OoTgInXznmbF3R2J6FSBC040rTv780oA37h4EIH1v0Q/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1OoTgInXznmbF3R2J6FSBC040rTv780oA37h4EIH1v0Q/edit?usp=sharing)
 
 Every file that can be accessed publicly (e.g. the favicon, the logos, the slides) can be found in `public`
