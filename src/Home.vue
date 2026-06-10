@@ -1,15 +1,15 @@
 <template>
   <div class="container py-5">
-    <!-- Hero -->
     <div class="row mb-5">
       <div class="col-md-8 mx-auto text-center">
         <h1 class="display-5 fw-bold">Computer Vision<br />Reading Group</h1>
-        <p class="lead">2026/27</p>
+        <p class="lead">
+          Course <a href="https://www.kth.se/student/kurser/kurs/FDD3313?l=en">FDD33136</a>
+        </p>
         <p class="text-muted mb-1">Robotics, Perception & Learning (RPL) Department @ KTH</p>
       </div>
     </div>
 
-    <!-- Format -->
     <div class="row mb-5">
       <div class="col-md-8 mx-auto">
         <h4 class="mb-3">Format</h4>
@@ -22,8 +22,8 @@
           <li class="list-group-item">Rotating presenter, open discussion</li>
           <li class="list-group-item">Different topics, each one lasting five sessions</li>
           <li class="list-group-item">
-            6 course credits for PhD students, given after attending at least 24 sessions, and
-            giving 2 presentations
+            This course is worth 6 credits for PhD students, given after attending at least 24
+            sessions, and giving 2 presentations
           </li>
         </ul>
       </div>
