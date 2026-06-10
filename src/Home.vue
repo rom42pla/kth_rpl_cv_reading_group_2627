@@ -18,12 +18,24 @@
             Bi-weekly sessions, usually Tuesdays at 13:00 but always keep an eye on the
             <RouterLink to="/schedule">schedule</RouterLink>
           </li>
-          <li class="list-group-item">One or two papers per session</li>
+          <li class="list-group-item">
+            One or two papers per session<br />
+            Students are expected to have read the paper before participating in a session
+          </li>
           <li class="list-group-item">Rotating presenter, open discussion</li>
           <li class="list-group-item">Different topics, each one lasting five sessions</li>
           <li class="list-group-item">
             This course is worth 6 credits for PhD students, given after attending at least 24
             sessions, and giving 2 presentations
+          </li>
+          <li class="list-group-item">
+            Attendance list can be found
+            <a
+              href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_vsPNn-t_PaWutHU4wG6l9zKFILJBYanWvnVuERW6dlqtvKP3qNVth9NAjGrdzbjqoOr-vofWiWR7/pubhtml"
+              >here</a
+            ><br />
+            The list is updated by the organizers, but it is up to the participants to verify if
+            data is correct
           </li>
         </ul>
       </div>
