@@ -1,3 +1,4 @@
+```vue
 <template>
   <div class="container">
     <div class="col-md-8 mx-auto">
@@ -22,7 +23,7 @@
           </h2>
           <div class="accordion-collapse" :class="openPast ? 'collapse show' : 'collapse'">
             <div class="accordion-body">
-              <template v-for="(session, index) in pastSessions" :key="'past-' + index">
+              <template v-for="(session, index) in pagedPastSessions" :key="'past-' + index">
                 <ScheduleSession
                   :session_number="session.session_number"
                   :date="session.date"
@@ -40,6 +41,27 @@
                 />
               </template>
               <p v-if="!pastSessions.length" class="text-muted">No past seminars yet.</p>
+              <nav v-if="pastTotalPages > 1" class="mt-3">
+                <ul class="pagination pagination-sm justify-content-center">
+                  <li class="page-item" :class="{ disabled: pastPage === 1 }">
+                    <button class="page-link" @click="pastPage--">‹</button>
+                  </li>
+                  <li
+                    v-for="(p, index) in visiblePastPages"
+                    :key="`${p}-${index}`"
+                    class="page-item"
+                    :class="{ active: pastPage === p, disabled: p === '...' }"
+                  >
+                    <button v-if="p !== '...'" class="page-link" @click="pastPage = Number(p)">
+                      {{ p }}
+                    </button>
+                    <span v-else class="page-link">...</span>
+                  </li>
+                  <li class="page-item" :class="{ disabled: pastPage === pastTotalPages }">
+                    <button class="page-link" @click="pastPage++">›</button>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
@@ -98,7 +120,10 @@
           </h2>
           <div class="accordion-collapse" :class="openScheduled ? 'collapse show' : 'collapse'">
             <div class="accordion-body">
-              <template v-for="(session, index) in scheduledSessions" :key="'scheduled-' + index">
+              <template
+                v-for="(session, index) in pagedScheduledSessions"
+                :key="'scheduled-' + index"
+              >
                 <ScheduleSession
                   :session_number="session.session_number"
                   :date="session.date"
@@ -118,6 +143,27 @@
               <p v-if="!scheduledSessions.length" class="text-muted">
                 No further seminars scheduled.
               </p>
+              <nav v-if="scheduledTotalPages > 1" class="mt-3">
+                <ul class="pagination pagination-sm justify-content-center">
+                  <li class="page-item" :class="{ disabled: scheduledPage === 1 }">
+                    <button class="page-link" @click="scheduledPage--">‹</button>
+                  </li>
+                  <li
+                    v-for="p in scheduledTotalPages"
+                    :key="p"
+                    class="page-item"
+                    :class="{ active: scheduledPage === p }"
+                  >
+                    <button class="page-link" @click="scheduledPage = p">{{ p }}</button>
+                  </li>
+                  <li
+                    class="page-item"
+                    :class="{ disabled: scheduledPage === scheduledTotalPages }"
+                  >
+                    <button class="page-link" @click="scheduledPage++">›</button>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
@@ -134,6 +180,10 @@ const loading = ref(true)
 const openPast = ref(false)
 const openNext = ref(true)
 const openScheduled = ref(false)
+
+const PAGE_SIZE = 4
+const pastPage = ref(1)
+const scheduledPage = ref(1)
 
 const toggle = (panel: 'past' | 'next' | 'scheduled') => {
   openPast.value = panel === 'past' ? !openPast.value : false
@@ -159,21 +209,70 @@ interface Session {
 
 const sessions = ref<Session[]>([])
 
-const today = new Date()
-today.setHours(0, 0, 0, 0)
+const now = new Date()
+now.setHours(now.getHours() - 2)
 
-const pastSessions = computed(() => sessions.value.filter((s) => new Date(s.date) < today))
+const pastSessions = computed(() => sessions.value.filter((s) => new Date(s.date) < now))
 
-const nextSession = computed(() => sessions.value.find((s) => new Date(s.date) >= today) ?? null)
+const nextSession = computed(() => sessions.value.find((s) => new Date(s.date) >= now) ?? null)
 
 const scheduledSessions = computed(() =>
-  sessions.value.filter((s) => new Date(s.date) >= today && s !== nextSession.value),
+  sessions.value.filter((s) => new Date(s.date) >= now && s !== nextSession.value),
 )
+
+const pastTotalPages = computed(() => Math.ceil(pastSessions.value.length / PAGE_SIZE))
+const scheduledTotalPages = computed(() => Math.ceil(scheduledSessions.value.length / PAGE_SIZE))
+
+const pagedPastSessions = computed(() => {
+  const start = (pastPage.value - 1) * PAGE_SIZE
+  return pastSessions.value.slice(start, start + PAGE_SIZE)
+})
+
+const pagedScheduledSessions = computed(() => {
+  const start = (scheduledPage.value - 1) * PAGE_SIZE
+  return scheduledSessions.value.slice(start, start + PAGE_SIZE)
+})
 
 const or = (val: string) => val?.trim() || null
 
+const visiblePastPages = computed(() => {
+  const total = pastTotalPages.value
+  const current = pastPage.value
+  if (total <= 5) {
+    return Array.from({ length: total }, (_, i) => i + 1)
+  }
+
+  if (current <= 3) {
+    return [1, 2, 3, 4, '...', total]
+  }
+
+  if (current >= total - 2) {
+    return [1, '...', total - 3, total - 2, total - 1, total]
+  }
+
+  return [1, '...', current - 1, current, current + 1, '...', total]
+})
+
+const visibleScheduledPages = computed(() => {
+  const total = scheduledTotalPages.value
+  const current = scheduledPage.value
+
+  if (total <= 5) {
+    return Array.from({ length: total }, (_, i) => i + 1)
+  }
+
+  if (current <= 3) {
+    return [1, 2, 3, 4, '...', total]
+  }
+
+  if (current >= total - 2) {
+    return [1, '...', total - 3, total - 2, total - 1, total]
+  }
+
+  return [1, '...', current - 1, current, current + 1, '...', total]
+})
+
 onMounted(async () => {
-  // const response = await fetch(import.meta.env.BASE_URL + 'seminars.csv')
   const response = await fetch(
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vT3L0usWznwB4gJtVAOtQnQx_X7mOrTZ0DInv_8PNg45xvO60FExh42rYybwwKNdebYoFDcWtS4c4gN/pub?gid=1236605236&single=true&output=csv',
   )
@@ -184,9 +283,9 @@ onMounted(async () => {
     transformHeader: (h) => h.trim(),
   })
 
-  sessions.value = (parsed as any[]).map((row, index) => {
+  const mapped = (parsed as any[]).map((row, index) => {
     const date = or(row.date) ?? ''
-    const isPast = new Date(date) < today
+    const isPast = new Date(date) < now
     return {
       session_number: index + 1,
       date,
@@ -203,6 +302,16 @@ onMounted(async () => {
       arxiv_link: or(row.arxiv_link),
     }
   })
+
+  const past = mapped
+    .filter((s) => new Date(s.date) < now)
+    .sort((a, b) => b.date.localeCompare(a.date))
+  const future = mapped
+    .filter((s) => new Date(s.date) >= now)
+    .sort((a, b) => a.date.localeCompare(b.date))
+
+  sessions.value = [...past, ...future]
   loading.value = false
 })
 </script>
+```
